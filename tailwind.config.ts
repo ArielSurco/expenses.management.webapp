@@ -7,6 +7,7 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/shared/**/*.{js,ts,jsx,tsx,mdx}',
     './src/layout/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/auth/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
