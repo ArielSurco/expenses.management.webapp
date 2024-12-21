@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/layout/components/theme-provider'
 
 import './globals.css'
 
+import { Navbar } from '@/layout/components/navbar'
 import { ThemeToggle } from '@/layout/components/theme-toggle'
 
 const geistSans = Geist({
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='dark' disableTransitionOnChange enableSystem>
+          <Navbar />
           <ThemeToggle />
           {children}
         </ThemeProvider>

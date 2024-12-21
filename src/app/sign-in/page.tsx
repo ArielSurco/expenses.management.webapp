@@ -27,7 +27,7 @@ const signIn = async () => {
 
 export default function SignIn() {
   return (
-    <div className='grid min-h-screen w-full place-items-center'>
+    <main className='grid min-h-screen w-full place-items-center'>
       <Card className='w-1/3 min-w-fit'>
         <CardHeader>
           <CardTitle className='text-center'>Sign in</CardTitle>
@@ -60,6 +60,6 @@ export default function SignIn() {
           </CardDescription>
         </CardFooter>
       </Card>
-    </div>
+    </main>
   )
 }
