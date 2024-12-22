@@ -23,7 +23,7 @@ export const ROUTES = {
     sidebar: null,
   },
   dashboard: {
-    path: '/',
+    path: '/dashboard',
     isProtected: true,
     sidebar: {
       title: 'Dashboard',
