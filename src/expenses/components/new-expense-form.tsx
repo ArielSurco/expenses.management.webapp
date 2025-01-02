@@ -26,7 +26,7 @@ export function NewExpenseForm() {
       <Input name='title' placeholder='Title' />
       <NumberInput allowNegative={false} autoComplete='off' name='amount' placeholder='Amount' />
       <div className='relative z-50'>
-        <DatePicker name='date' />
+        <DatePicker defaultValue={new Date()} name='date' />
       </div>
       <Select defaultValue={CATEGORIES[0]} name='category'>
         <SelectTrigger>

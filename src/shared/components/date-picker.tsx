@@ -13,11 +13,12 @@ import { cn } from '@/shared/functions/cn'
 import { Input } from './input'
 
 interface DatePickerProps {
+  defaultValue?: Date
   name?: string
 }
 
-export function DatePicker({ name }: Readonly<DatePickerProps>) {
-  const [date, setDate] = useState<Date>()
+export function DatePicker({ name, defaultValue }: Readonly<DatePickerProps>) {
+  const [date, setDate] = useState<Date | undefined>(defaultValue)
 
   const inputRef = useRef<HTMLInputElement>(null)
 
