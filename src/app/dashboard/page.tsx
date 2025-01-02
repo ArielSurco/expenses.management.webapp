@@ -3,6 +3,7 @@
 import { Cell, Pie, PieChart } from 'recharts'
 
 import { ExpensesBarChart } from '@/expenses/components/expenses-bar-chart'
+import { NewExpenseForm } from '@/expenses/components/new-expense-form'
 import { SummaryCard } from '@/expenses/components/summary-card'
 import {
   generateColor,
@@ -13,6 +14,13 @@ import {
 import { Button } from '@/shared/components/button'
 import { Card, CardContent } from '@/shared/components/card'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/shared/components/chart'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/components/dialog'
 import { cn } from '@/shared/functions/cn'
 
 export default function Dashboard() {
@@ -26,12 +34,27 @@ export default function Dashboard() {
             {...card}
           />
         ))}
-        <Card>
-          <CardContent className='flex flex-col gap-4 p-4'>
-            <Button variant='default'>Add expense</Button>
-            <Button variant='outline'>Add income</Button>
-          </CardContent>
-        </Card>
+        <Dialog>
+          <Card>
+            <CardContent className='flex flex-col gap-4 p-4'>
+              <DialogTrigger asChild>
+                <Button variant='default'>Add expense</Button>
+              </DialogTrigger>
+              <Button variant='outline'>Add income</Button>
+            </CardContent>
+          </Card>
+
+          <DialogContent
+            onInteractOutside={(e) => {
+              e.preventDefault()
+            }}
+          >
+            <DialogHeader>
+              <DialogTitle>Create a new expense</DialogTitle>
+            </DialogHeader>
+            <NewExpenseForm />
+          </DialogContent>
+        </Dialog>
       </div>
       <div className='mt-4 flex gap-4'>
         <Card className='w-2/3 p-4'>

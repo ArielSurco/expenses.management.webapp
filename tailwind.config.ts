@@ -8,6 +8,7 @@ export default {
     './src/shared/**/*.{js,ts,jsx,tsx,mdx}',
     './src/layout/**/*.{js,ts,jsx,tsx,mdx}',
     './src/auth/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/expenses/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
