@@ -30,7 +30,7 @@ export type ExpenseCategory =
   | 'Shopping'
   | 'Healthcare'
 
-const CATEGORIES: ExpenseCategory[] = [
+export const CATEGORIES: ExpenseCategory[] = [
   'Food',
   'Transportation',
   'Housing',
