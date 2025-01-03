@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { MdOutlineCreate } from 'react-icons/md'
+import { RiArrowGoBackFill } from 'react-icons/ri'
 
 import { Button } from '@/shared/components/button'
 import { Input } from '@/shared/components/input'
@@ -45,7 +46,7 @@ export function CategoryField() {
         </Select>
       )}
       <Button onClick={toggleIsNewCategory} size='icon' variant='ghost'>
-        <MdOutlineCreate />
+        {isNewCategory ? <RiArrowGoBackFill /> : <MdOutlineCreate />}
       </Button>
     </div>
   )
