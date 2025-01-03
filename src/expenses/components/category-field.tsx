@@ -45,7 +45,7 @@ export function CategoryField() {
           </SelectContent>
         </Select>
       )}
-      <Button onClick={toggleIsNewCategory} size='icon' variant='ghost'>
+      <Button onClick={toggleIsNewCategory} size='icon' type='button' variant='ghost'>
         {isNewCategory ? <RiArrowGoBackFill /> : <MdOutlineCreate />}
       </Button>
     </div>
