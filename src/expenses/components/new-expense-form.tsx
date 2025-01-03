@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/select'
+import { TextArea } from '@/shared/components/text-area'
 
 import { CATEGORIES } from '../constants/mock-data'
 
@@ -24,8 +25,8 @@ export function NewExpenseForm() {
   return (
     <Form action={action} className='flex flex-col gap-4'>
       <Input name='title' placeholder='Title' />
-      <NumberInput allowNegative={false} autoComplete='off' name='amount' placeholder='Amount' />
-      <div className='relative z-50'>
+      <div className='flex gap-4'>
+        <NumberInput allowNegative={false} autoComplete='off' name='amount' placeholder='Amount' />
         <DatePicker defaultValue={new Date()} name='date' />
       </div>
       <Select defaultValue={CATEGORIES[0]} name='category'>
@@ -42,6 +43,7 @@ export function NewExpenseForm() {
           </SelectGroup>
         </SelectContent>
       </Select>
+      <TextArea name='description' placeholder='Description' />
       <Button type='submit'>Add expense</Button>
     </Form>
   )
