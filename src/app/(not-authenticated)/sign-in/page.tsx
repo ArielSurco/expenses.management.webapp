@@ -1,9 +1,12 @@
 import Form from 'next/form'
-import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
+import { redirect, RedirectType } from 'next/navigation'
 
 import { Label } from '@radix-ui/react-label'
 
 import { PasswordInput } from '@/auth/components/password-input'
+import { SignInFeedback } from '@/auth/components/sign-in-feedback'
+import { signInService } from '@/auth/services/sign-in'
 import { Button } from '@/shared/components/button'
 import {
   Card,
@@ -17,12 +20,27 @@ import { FormPendingSpinner } from '@/shared/components/form-pending-spinner'
 import { Input } from '@/shared/components/input'
 import { Link } from '@/shared/components/link'
 
-const signIn = async () => {
+const signIn = async (formData: FormData) => {
   'use server'
 
-  await new Promise((resolve) => setTimeout(resolve, 3000))
+  const { success, data } = await signInService({
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  })
 
-  redirect('/home')
+  if (success) {
+    const cookiesStore = await cookies()
+
+    cookiesStore.set('token', data.token)
+
+    redirect('/dashboard')
+  }
+
+  const searchParams = new URLSearchParams({
+    invalidCredentials: 'true',
+  })
+
+  redirect(`/sign-in?${searchParams.toString()}`, RedirectType.replace)
 }
 
 export default function SignIn() {
@@ -44,6 +62,8 @@ export default function SignIn() {
               <Label htmlFor='password'>Password</Label>
               <PasswordInput id='password' name='password' placeholder='Password' required />
             </div>
+
+            <SignInFeedback />
 
             <Button className='w-full' type='submit'>
               Sign in
