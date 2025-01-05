@@ -9,6 +9,7 @@ export default {
     './src/layout/**/*.{js,ts,jsx,tsx,mdx}',
     './src/auth/**/*.{js,ts,jsx,tsx,mdx}',
     './src/expenses/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/incomes/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {

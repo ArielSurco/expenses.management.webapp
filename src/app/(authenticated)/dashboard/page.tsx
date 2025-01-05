@@ -11,6 +11,7 @@ import {
   pieChartData,
   summaryCards,
 } from '@/expenses/constants/mock-data'
+import { NewIncomeDialog } from '@/incomes/components/new-income-dialog'
 import { Button } from '@/shared/components/button'
 import { Card, CardContent } from '@/shared/components/card'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/shared/components/chart'
@@ -32,7 +33,9 @@ export default function Dashboard() {
             <NewExpenseDialog>
               <Button variant='default'>Add expense</Button>
             </NewExpenseDialog>
-            <Button variant='outline'>Add income</Button>
+            <NewIncomeDialog>
+              <Button variant='outline'>Add income</Button>
+            </NewIncomeDialog>
           </CardContent>
         </Card>
       </div>
