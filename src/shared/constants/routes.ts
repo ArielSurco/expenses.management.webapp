@@ -2,9 +2,10 @@ import { type ComponentPropsWithoutRef, type ComponentType } from 'react'
 
 import { Home, Settings } from 'lucide-react'
 
-interface Route {
+export interface Route {
   isProtected: boolean
   path: string
+  permanentRedirect?: string
   sidebar?: {
     title: string
     icon: ComponentType<ComponentPropsWithoutRef<'svg'>>
@@ -12,6 +13,12 @@ interface Route {
 }
 
 export const ROUTES = {
+  root: {
+    path: '/',
+    isProtected: true,
+    sidebar: null,
+    permanentRedirect: '/dashboard',
+  },
   signIn: {
     path: '/sign-in',
     isProtected: false,
