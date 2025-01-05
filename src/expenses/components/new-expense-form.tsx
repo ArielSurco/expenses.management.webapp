@@ -6,6 +6,14 @@ import { Input } from '@/shared/components/input'
 import { NumberInput } from '@/shared/components/number-input'
 import { TextArea } from '@/shared/components/text-area'
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/components/select'
+import { mockAccounts } from '../constants/mock-data'
 import { CategoryField } from './category-field'
 
 const action = async (formData: FormData) => {
@@ -17,6 +25,18 @@ export function NewExpenseForm() {
   return (
     <Form action={action} className='flex flex-col gap-4'>
       <Input name='title' placeholder='Title' />
+      <Select name='accountId'>
+        <SelectTrigger>
+          <SelectValue placeholder='Select an account' />
+        </SelectTrigger>
+        <SelectContent>
+          {mockAccounts.map((account) => (
+            <SelectItem key={account.id} value={String(account.id)}>
+              {account.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
       <div className='flex gap-4'>
         <NumberInput allowNegative={false} autoComplete='off' name='amount' placeholder='Amount' />
         <DatePicker defaultValue={new Date()} name='date' />

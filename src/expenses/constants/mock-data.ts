@@ -165,3 +165,18 @@ export const pieChartData = mockExpensesReport.reduce<Record<string, number>>((p
 
   return prev
 }, {})
+
+export const mockAccounts = [
+  {
+    id: 1,
+    name: 'HSBC',
+  },
+  {
+    id: 2,
+    name: 'Supervielle',
+  },
+  {
+    id: 3,
+    name: 'Santander',
+  },
+]
