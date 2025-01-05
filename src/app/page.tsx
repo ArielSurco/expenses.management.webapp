@@ -1,3 +1,7 @@
+import { redirect } from 'next/navigation'
+
+import { ROUTES } from '@/shared/constants/routes'
+
 export default function Home() {
-  return <div>home</div>
+  redirect(ROUTES.dashboard.path)
 }
