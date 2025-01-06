@@ -8,6 +8,8 @@ const protectedRoutes = Object.values(ROUTES)
   .filter((route) => route.isProtected)
   .map((route) => route.path)
 
+const forbiddenRoutesWhenAuthenticated: string[] = [ROUTES.signIn.path, ROUTES.signUp.path]
+
 const findRouteByPath = (path: string): Route | null => {
   return Object.values(ROUTES).find((route) => route.path === path) ?? null
 }
@@ -21,7 +23,7 @@ export default withAuth(
       return NextResponse.redirect(new URL(ROUTES.signIn.path, req.url))
     }
 
-    if (nextToken && req.nextUrl.pathname === ROUTES.signIn.path) {
+    if (nextToken && forbiddenRoutesWhenAuthenticated.includes(route?.path ?? '')) {
       return NextResponse.redirect(new URL(ROUTES.dashboard.path, req.url))
     }
 
