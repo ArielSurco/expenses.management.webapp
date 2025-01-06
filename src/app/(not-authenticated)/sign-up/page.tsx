@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation'
 import { Label } from '@radix-ui/react-label'
 
 import { PasswordInput } from '@/auth/components/password-input'
+import { SignUpFeedback } from '@/auth/components/sign-up-feedback'
+import { signUpService } from '@/auth/services/sign-up'
 import { Button } from '@/shared/components/button'
 import {
   Card,
@@ -16,13 +18,22 @@ import {
 import { FormPendingSpinner } from '@/shared/components/form-pending-spinner'
 import { Input } from '@/shared/components/input'
 import { Link } from '@/shared/components/link'
+import { ROUTES } from '@/shared/constants/routes'
 
-const signIn = async () => {
+const signIn = async (formData: FormData) => {
   'use server'
 
-  await new Promise((resolve) => setTimeout(resolve, 3000))
+  const response = await signUpService({
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+    username: formData.get('username') as string,
+  })
 
-  redirect('/home')
+  if (response.success) {
+    redirect(ROUTES.signIn.path)
+  }
+
+  redirect(`${ROUTES.signUp.path}?error=${response.errorMessage}`)
 }
 
 export default function SignUp() {
@@ -35,6 +46,11 @@ export default function SignUp() {
         <CardContent>
           <Form action={signIn} className='flex flex-col gap-3'>
             <CardDescription>Create an account to get started</CardDescription>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='username'>Username</Label>
+              <Input id='username' name='username' placeholder='Username' required />
+            </div>
+
             <div className='flex flex-col gap-2'>
               <Label htmlFor='email'>Email</Label>
               <Input id='email' name='email' placeholder='Email' required />
@@ -54,6 +70,8 @@ export default function SignUp() {
                 required
               />
             </div>
+
+            <SignUpFeedback />
 
             <Button className='w-full'>Sign up</Button>
             <FormPendingSpinner />
