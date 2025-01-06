@@ -1,6 +1,10 @@
+import { MdLogout } from 'react-icons/md'
+
+import { SignOutButton } from '@/auth/components/sign-out-button'
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
@@ -33,6 +37,16 @@ export function NavigationSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SignOutButton>
+              <MdLogout />
+              Sign Out
+            </SignOutButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )
