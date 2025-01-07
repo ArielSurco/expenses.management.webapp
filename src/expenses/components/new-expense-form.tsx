@@ -1,5 +1,6 @@
 import Form from 'next/form'
 
+import { getCategoriesService } from '@/categories/services/get-categories'
 import { Button } from '@/shared/components/button'
 import { DatePicker } from '@/shared/components/date-picker'
 import { Input } from '@/shared/components/input'
@@ -13,10 +14,15 @@ const action = async (formData: FormData) => {
   'use server'
 
   await new Promise((resolve) => setTimeout(resolve, 1000))
+  // eslint-disable-next-line no-console
   console.log(Array.from(formData.entries()))
 }
 
-export function NewExpenseForm() {
+export async function NewExpenseForm() {
+  const categoriesResponse = await getCategoriesService()
+
+  const categories = categoriesResponse.success ? categoriesResponse.data : []
+
   return (
     <Form action={action} className='flex flex-col gap-4'>
       <Input name='title' placeholder='Title' />
@@ -25,7 +31,7 @@ export function NewExpenseForm() {
         <NumberInput allowNegative={false} autoComplete='off' name='amount' placeholder='Amount' />
         <DatePicker defaultValue={new Date()} name='date' />
       </div>
-      <CategoryField />
+      <CategoryField categories={categories} />
       <TextArea name='description' placeholder='Description' />
       <Button type='submit'>Add expense</Button>
     </Form>

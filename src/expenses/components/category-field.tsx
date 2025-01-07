@@ -16,9 +16,14 @@ import {
   SelectValue,
 } from '@/shared/components/select'
 
-import { CATEGORIES } from '../constants/mock-data'
+interface CategoryFieldProps {
+  categories: {
+    id: string
+    name: string
+  }[]
+}
 
-export function CategoryField() {
+export function CategoryField({ categories }: Readonly<CategoryFieldProps>) {
   const [isNewCategory, setIsNewCategory] = useState<boolean>(false)
 
   const toggleIsNewCategory = () => {
@@ -30,15 +35,15 @@ export function CategoryField() {
       {isNewCategory ? (
         <Input name='newCategory' placeholder='New category' />
       ) : (
-        <Select defaultValue={CATEGORIES[0]} name='category'>
+        <Select defaultValue={categories[0]?.id} name='category'>
           <SelectTrigger>
             <SelectValue placeholder='Select a category' />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {CATEGORIES.map((category) => (
-                <SelectItem key={category} value={category}>
-                  {category}
+              {categories.map((category) => (
+                <SelectItem key={category.id} value={category.id}>
+                  {category.name}
                 </SelectItem>
               ))}
             </SelectGroup>

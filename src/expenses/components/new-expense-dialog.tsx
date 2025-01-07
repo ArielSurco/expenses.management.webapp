@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { Suspense, type ReactNode } from 'react'
 
 import {
   Dialog,
@@ -22,7 +22,9 @@ export function NewExpenseDialog({ children }: Readonly<NewExpenseDialogProps>) 
         <DialogHeader>
           <DialogTitle>Create a new expense</DialogTitle>
         </DialogHeader>
-        <NewExpenseForm />
+        <Suspense fallback={<div>Loading...</div>}>
+          <NewExpenseForm />
+        </Suspense>
       </DialogContent>
     </Dialog>
   )

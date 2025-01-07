@@ -1,10 +1,9 @@
-import NextAuth from 'next-auth'
+import NextAuth, { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 import { signInService } from '@/auth/services/sign-in'
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -13,7 +12,6 @@ const handler = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        console.log('response')
         const response = await signInService({
           email: credentials?.email ?? '',
           password: credentials?.password ?? '',
@@ -22,6 +20,7 @@ const handler = NextAuth({
         if (response.success) {
           return {
             id: '1',
+            accessToken: response.data.token,
           }
         }
 
@@ -30,17 +29,28 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      console.log('url', url)
-      console.log('baseUrl', baseUrl)
+    jwt({ account, token, user }) {
+      if (account) {
+        token.id = user.id
+        token.accessToken = user.accessToken
+      }
 
-      return baseUrl
+      return token
+    },
+    session({ session, token }) {
+      session.user.id = token.id as string
+      session.user.accessToken = token.accessToken as string
+
+      return session
     },
   },
   pages: {
     signIn: '/sign-in',
     newUser: '/dashboard',
   },
-})
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

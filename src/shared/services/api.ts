@@ -1,16 +1,24 @@
 import { type ZodSchema } from 'zod'
 
+import { getServerSession } from '@/shared/actions/get-server-session'
+
 import { safeFetch } from '../functions/safe-fetch'
 
-const apiFetch = async <T>(schema: ZodSchema<T>, path: string, init?: RequestInit) => {
+interface FetchRequestInit extends RequestInit {
+  sendToken?: boolean
+}
+
+const apiFetch = async <T>(schema: ZodSchema<T>, path: string, init?: FetchRequestInit) => {
   'use server'
 
   const apiURL = process.env.API_URL ?? ''
+  const session = await getServerSession()
 
   const data = await safeFetch(schema, `${apiURL}${path}`, {
     ...init,
     headers: {
       'Content-Type': 'application/json',
+      ...(init?.sendToken ? { Authorization: `Bearer ${session?.user.accessToken ?? ''}` } : {}),
       ...init?.headers,
     },
   })
