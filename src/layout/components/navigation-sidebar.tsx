@@ -42,7 +42,7 @@ export function NavigationSidebar() {
           <SidebarMenuItem>
             <SignOutButton>
               <MdLogout />
-              Sign Out
+              <span>Sign Out</span>
             </SignOutButton>
           </SidebarMenuItem>
         </SidebarMenu>
