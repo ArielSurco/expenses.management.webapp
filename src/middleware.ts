@@ -4,10 +4,6 @@ import { withAuth } from 'next-auth/middleware'
 
 import { type Route, ROUTES } from './shared/constants/routes'
 
-const protectedRoutes = Object.values(ROUTES)
-  .filter((route) => route.isProtected)
-  .map((route) => route.path)
-
 const forbiddenRoutesWhenAuthenticated: string[] = [ROUTES.signIn.path, ROUTES.signUp.path]
 
 const findRouteByPath = (path: string): Route | null => {
@@ -41,5 +37,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: [...protectedRoutes, ROUTES.signIn.path],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
 }
