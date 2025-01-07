@@ -8,6 +8,8 @@ import { NumberInput } from '@/shared/components/number-input'
 import { TextArea } from '@/shared/components/text-area'
 
 const action = async (formData: FormData) => {
+  'use server'
+
   await new Promise((resolve) => setTimeout(resolve, 1000))
   console.log(Array.from(formData.entries()))
 }

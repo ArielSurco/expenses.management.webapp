@@ -1,3 +1,5 @@
+'use client'
+
 import { type ComponentProps } from 'react'
 
 import { NumericFormat } from 'react-number-format'

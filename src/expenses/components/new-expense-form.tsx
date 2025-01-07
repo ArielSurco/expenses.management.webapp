@@ -10,6 +10,8 @@ import { AccountField } from './account-field'
 import { CategoryField } from './category-field'
 
 const action = async (formData: FormData) => {
+  'use server'
+
   await new Promise((resolve) => setTimeout(resolve, 1000))
   console.log(Array.from(formData.entries()))
 }

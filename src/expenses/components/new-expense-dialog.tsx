@@ -1,3 +1,5 @@
+import { type ReactNode } from 'react'
+
 import {
   Dialog,
   DialogContent,
@@ -5,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/components/dialog'
-import { type ReactNode } from 'react'
+
 import { NewExpenseForm } from './new-expense-form'
 
 interface NewExpenseDialogProps {
@@ -16,11 +18,7 @@ export function NewExpenseDialog({ children }: Readonly<NewExpenseDialogProps>) 
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent
-        onInteractOutside={(e) => {
-          e.preventDefault()
-        }}
-      >
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Create a new expense</DialogTitle>
         </DialogHeader>

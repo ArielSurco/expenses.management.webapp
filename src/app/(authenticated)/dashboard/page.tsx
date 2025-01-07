@@ -1,11 +1,8 @@
-'use client'
-
-import { Cell, Pie, PieChart } from 'recharts'
-
 import { ExpensesBarChart } from '@/expenses/components/expenses-bar-chart'
 import { NewExpenseDialog } from '@/expenses/components/new-expense-dialog'
 import { SummaryCard } from '@/expenses/components/summary-card'
 import {
+  type ExpenseCategory,
   generateColor,
   pieChartConfig,
   pieChartData,
@@ -16,6 +13,7 @@ import { Button } from '@/shared/components/button'
 import { Card, CardContent } from '@/shared/components/card'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/shared/components/chart'
 import { cn } from '@/shared/functions/cn'
+import { Cell, Pie, PieChart } from '@/shared/lib/recharts'
 
 export default function Dashboard() {
   return (
