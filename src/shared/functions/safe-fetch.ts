@@ -27,11 +27,15 @@ export const safeFetch = async <T>(
     const parsedData = schema.safeParse(data)
 
     if (!parsedData.success) {
-      throw new Error(parsedData.error.errors.map((error) => error.message).join(', '))
+      throw new Error(
+        parsedData.error.errors
+          .map((error) => `${String(error.path[1])}: ${error.message}`)
+          .join(', '),
+      )
     }
 
     return {
-      data: parsedData.data,
+      data: data as T,
       errorMessage: undefined,
       status: response.status,
       success: true,

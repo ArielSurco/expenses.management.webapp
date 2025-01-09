@@ -1,5 +1,6 @@
 import Form from 'next/form'
 
+import { getAccountsService } from '@/accounts/services/get-accounts'
 import { getCategoriesService } from '@/categories/services/get-categories'
 import { Button } from '@/shared/components/button'
 import { DatePicker } from '@/shared/components/date-picker'
@@ -19,14 +20,18 @@ const action = async (formData: FormData) => {
 }
 
 export async function NewExpenseForm() {
-  const categoriesResponse = await getCategoriesService()
+  const [categoriesResponse, accountsResponse] = await Promise.all([
+    getCategoriesService(),
+    getAccountsService(),
+  ])
 
   const categories = categoriesResponse.success ? categoriesResponse.data : []
+  const accounts = accountsResponse.success ? accountsResponse.data : []
 
   return (
     <Form action={action} className='flex flex-col gap-4'>
       <Input name='title' placeholder='Title' />
-      <AccountField />
+      <AccountField accounts={accounts} />
       <div className='flex gap-4'>
         <NumberInput allowNegative={false} autoComplete='off' name='amount' placeholder='Amount' />
         <DatePicker defaultValue={new Date()} name='date' />

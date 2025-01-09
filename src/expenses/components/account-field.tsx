@@ -5,21 +5,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/select'
-import { mockAccounts } from '../constants/mock-data'
 
 interface AccountFieldProps {
+  accounts: {
+    id: string
+    name: string
+  }[]
   name?: string
 }
 
-export function AccountField({ name }: AccountFieldProps) {
+export function AccountField({ name, accounts }: Readonly<AccountFieldProps>) {
   return (
-    <Select name={name}>
+    <Select defaultValue={accounts[0].id} name={name}>
       <SelectTrigger>
         <SelectValue placeholder='Select an account' />
       </SelectTrigger>
       <SelectContent>
-        {mockAccounts.map((account) => (
-          <SelectItem key={account.id} value={String(account.id)}>
+        {accounts.map((account) => (
+          <SelectItem key={account.id} value={account.id}>
             {account.name}
           </SelectItem>
         ))}
