@@ -15,25 +15,28 @@ interface AccountFieldProps {
   accounts: {
     id: string
     name: string
-    currencyId: string
+    currency: {
+      id: string
+      symbol: string
+    }
   }[]
   name?: string
 }
 
 export function AccountField({ name, accounts }: Readonly<AccountFieldProps>) {
-  const [currencyId, setCurrencyId] = useState<string>(accounts[0].currencyId)
+  const [currency, setCurrency] = useState(accounts[0].currency)
 
   const handleSelectValueChange = (value: string) => {
     const selectedAccount = accounts.find((account) => account.id === value)
 
     if (selectedAccount) {
-      setCurrencyId(selectedAccount.currencyId)
+      setCurrency(selectedAccount.currency)
     }
   }
 
   return (
     <>
-      <Input name='currencyId' type='hidden' value={currencyId} />
+      <Input data-symbol={currency.symbol} name='currencyId' type='hidden' value={currency.id} />
       <Select defaultValue={accounts[0].id} name={name} onValueChange={handleSelectValueChange}>
         <SelectTrigger>
           <SelectValue placeholder='Select an account' />

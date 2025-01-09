@@ -6,7 +6,6 @@ import { getCategoriesService } from '@/categories/services/get-categories'
 import { Button } from '@/shared/components/button'
 import { DatePicker } from '@/shared/components/date-picker'
 import { Input } from '@/shared/components/input'
-import { NumberInput } from '@/shared/components/number-input'
 import { TextArea } from '@/shared/components/text-area'
 import { ROUTES } from '@/shared/constants/routes'
 import { removeNumberFormat } from '@/shared/functions/remove-number-format'
@@ -14,6 +13,7 @@ import { removeNumberFormat } from '@/shared/functions/remove-number-format'
 import { spendService } from '../services/spend'
 
 import { AccountField } from './account-field'
+import { AmountField } from './amount-field'
 import { CategoryField } from './category-field'
 
 const action = async (formData: FormData) => {
@@ -48,7 +48,7 @@ export async function NewExpenseForm() {
   const parsedAccounts = accounts.map((account) => ({
     id: account.id,
     name: account.name,
-    currencyId: account.currency.id,
+    currency: account.currency,
   }))
 
   return (
@@ -56,7 +56,7 @@ export async function NewExpenseForm() {
       <Input name='title' placeholder='Title' />
       <AccountField accounts={parsedAccounts} name='accountId' />
       <div className='flex gap-4'>
-        <NumberInput allowNegative={false} autoComplete='off' name='amount' placeholder='Amount' />
+        <AmountField name='amount' />
         <DatePicker defaultValue={new Date()} name='date' />
       </div>
       <CategoryField categories={categories} />
