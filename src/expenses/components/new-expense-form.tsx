@@ -28,10 +28,16 @@ export async function NewExpenseForm() {
   const categories = categoriesResponse.success ? categoriesResponse.data : []
   const accounts = accountsResponse.success ? accountsResponse.data : []
 
+  const parsedAccounts = accounts.map((account) => ({
+    id: account.id,
+    name: account.name,
+    currencyId: account.currency.id,
+  }))
+
   return (
     <Form action={action} className='flex flex-col gap-4'>
       <Input name='title' placeholder='Title' />
-      <AccountField accounts={accounts} />
+      <AccountField accounts={parsedAccounts} />
       <div className='flex gap-4'>
         <NumberInput allowNegative={false} autoComplete='off' name='amount' placeholder='Amount' />
         <DatePicker defaultValue={new Date()} name='date' />
