@@ -18,7 +18,7 @@ const responseSchema = z.object({
 })
 
 export const spendService = async (body: SpendServiceParams) => {
-  const response = await api.fetch(responseSchema, '/spend', {
+  const response = await api.fetch(responseSchema, '/movement/spend', {
     method: 'POST',
     body: JSON.stringify(body),
     sendToken: true,

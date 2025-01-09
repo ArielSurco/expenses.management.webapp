@@ -4,6 +4,7 @@ import { type ComponentProps } from 'react'
 
 import { NumericFormat } from 'react-number-format'
 
+import { NUMBER_FORMAT } from '../constants/number-format'
 import { cn } from '../functions/cn'
 
 export function NumberInput({ className, ...props }: ComponentProps<typeof NumericFormat>) {
@@ -14,8 +15,8 @@ export function NumberInput({ className, ...props }: ComponentProps<typeof Numer
         className,
       )}
       decimalScale={2}
-      decimalSeparator=','
-      thousandSeparator='.'
+      decimalSeparator={NUMBER_FORMAT.decimalSeparator}
+      thousandSeparator={NUMBER_FORMAT.thousandSeparator}
       {...props}
     />
   )

@@ -35,7 +35,7 @@ export function CategoryField({ categories }: Readonly<CategoryFieldProps>) {
       {isNewCategory ? (
         <Input name='newCategory' placeholder='New category' />
       ) : (
-        <Select defaultValue={categories[0]?.id} name='category'>
+        <Select defaultValue={categories[0]?.id} name='categoryId'>
           <SelectTrigger>
             <SelectValue placeholder='Select a category' />
           </SelectTrigger>
