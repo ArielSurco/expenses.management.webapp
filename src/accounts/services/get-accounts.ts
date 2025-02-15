@@ -14,7 +14,7 @@ const responseSchema = z.array(
       name: z.string(),
       symbol: z.string(),
     }),
-    deletedAt: z.string(),
+    deletedAt: z.string().nullable(),
     expenseUpToDate: z.number(),
     isActive: z.boolean(),
     limitCredit: z.number().optional(),
@@ -29,7 +29,7 @@ const responseSchema = z.array(
       createdAt: z.string(),
       updatedAt: z.string(),
       password: z.string(),
-      deletedAt: z.string(),
+      deletedAt: z.string().nullable(),
     }),
   }),
 )

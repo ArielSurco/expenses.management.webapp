@@ -24,7 +24,9 @@ interface AccountFieldProps {
 }
 
 export function AccountField({ name, accounts }: Readonly<AccountFieldProps>) {
-  const [currency, setCurrency] = useState(accounts[0].currency)
+  const [currency, setCurrency] = useState<
+    AccountFieldProps['accounts'][number]['currency'] | null
+  >(accounts[0]?.currency ?? null)
 
   const handleSelectValueChange = (value: string) => {
     const selectedAccount = accounts.find((account) => account.id === value)
@@ -36,8 +38,8 @@ export function AccountField({ name, accounts }: Readonly<AccountFieldProps>) {
 
   return (
     <>
-      <Input data-symbol={currency.symbol} name='currencyId' type='hidden' value={currency.id} />
-      <Select defaultValue={accounts[0].id} name={name} onValueChange={handleSelectValueChange}>
+      <Input data-symbol={currency?.symbol} name='currencyId' type='hidden' value={currency?.id} />
+      <Select defaultValue={accounts[0]?.id} name={name} onValueChange={handleSelectValueChange}>
         <SelectTrigger>
           <SelectValue placeholder='Select an account' />
         </SelectTrigger>
@@ -47,6 +49,9 @@ export function AccountField({ name, accounts }: Readonly<AccountFieldProps>) {
               {account.name}
             </SelectItem>
           ))}
+          {accounts.length === 0 && (
+            <span className='p-2 text-center text-lg'>No options available</span>
+          )}
         </SelectContent>
       </Select>
     </>
