@@ -7,6 +7,7 @@ import {
   pieChartConfig,
   pieChartData,
 } from '@/expenses/constants/mock-data'
+import { getBarChartData } from '@/expenses/functions/get-bar-chart-data'
 import { getSummaryCardsData } from '@/expenses/functions/get-summary-cards-data'
 import { NewIncomeDialog } from '@/incomes/components/new-income-dialog'
 import { getSummary } from '@/movements/services/get-summary'
@@ -42,7 +43,7 @@ export default async function Dashboard() {
       </div>
       <div className='mt-4 flex gap-4'>
         <Card className='w-2/3 p-4'>
-          <ExpensesBarChart />
+          <ExpensesBarChart data={getBarChartData(summary.data!)} />
         </Card>
         <Card className='w-1/3 p-4'>
           <ChartContainer className='mx-auto aspect-square max-h-[250px]' config={pieChartConfig}>

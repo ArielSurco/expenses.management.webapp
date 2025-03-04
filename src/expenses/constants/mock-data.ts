@@ -100,26 +100,6 @@ export const barChartConfig = {
   },
 } satisfies ChartConfig
 
-export const barChartData = mockExpensesReport
-  .map((item) => ({
-    month: Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date(item.date)),
-    amount: item.amount,
-    monthIndex: new Date(item.date).getMonth(),
-  }))
-  .reduce<{ month: string; amount: number; monthIndex: number }[]>((prev, curr) => {
-    const found = prev.find((item) => item.month === curr.month)
-
-    if (found) {
-      found.amount += curr.amount
-    } else {
-      prev.push(curr)
-    }
-
-    return prev
-  }, [])
-  .sort((a, b) => a.monthIndex - b.monthIndex)
-  .map(({ month, amount }) => ({ month, amount }))
-
 // Helper function to generate colors based on index
 export const generateColor = (index: number) => {
   // Generate evenly spaced hues around the color wheel
