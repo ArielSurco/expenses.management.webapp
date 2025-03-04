@@ -37,7 +37,8 @@ export function SummaryCard({
       {relativePercentage ? (
         <CardFooter className='p-0'>
           <div className='text-sm'>
-            {relativePercentage}% {relativePercentageLabel}
+            <NumberFormat format={{ maximumFractionDigits: 2 }} value={relativePercentage} />
+            <span className='text-xs'>% {relativePercentageLabel}</span>
           </div>
         </CardFooter>
       ) : null}

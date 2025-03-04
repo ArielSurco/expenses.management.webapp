@@ -3,9 +3,7 @@ import { type ChartConfig } from '@/shared/components/chart'
 import { getRelativePercentage } from '@/shared/functions/get-relative-percentage'
 
 export const getSummaryCardsData = (summaryResponse: GetSummarySuccessResponse) => {
-  const currentMonth = summaryResponse.find(
-    (item) => item.month === new Date().getMonth() && item.year === new Date().getFullYear(),
-  )
+  const currentMonth = summaryResponse.at(-1)
 
   const currentMonthValues = {
     budget: currentMonth?.budget ?? 0,
@@ -13,9 +11,7 @@ export const getSummaryCardsData = (summaryResponse: GetSummarySuccessResponse) 
     incomes: currentMonth?.incomes ?? 0,
   }
 
-  const lastMonth = summaryResponse.find(
-    (item) => item.month === new Date().getMonth() - 1 && item.year === new Date().getFullYear(),
-  )
+  const lastMonth = summaryResponse.at(-2)
 
   const lastMonthValues = {
     budget: lastMonth?.budget ?? 0,
