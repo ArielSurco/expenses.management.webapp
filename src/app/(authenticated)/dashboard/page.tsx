@@ -4,10 +4,10 @@ import { SummaryCard } from '@/expenses/components/summary-card'
 import {
   type ExpenseCategory,
   generateColor,
-  getSummaryCardsData,
   pieChartConfig,
   pieChartData,
 } from '@/expenses/constants/mock-data'
+import { getSummaryCardsData } from '@/expenses/functions/get-summary-cards-data'
 import { NewIncomeDialog } from '@/incomes/components/new-income-dialog'
 import { getSummary } from '@/movements/services/get-summary'
 import { Button } from '@/shared/components/button'
