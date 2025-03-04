@@ -1,24 +1,63 @@
+import { type GetSummarySuccessResponse } from '@/movements/services/get-summary'
 import { type ChartConfig } from '@/shared/components/chart'
+import { getRelativePercentage } from '@/shared/functions/get-relative-percentage'
 
-export const summaryCards = {
-  budget: {
-    title: 'Monthly budget',
-    value: 256700.8,
-    relativePercentage: 22,
-    relativePercentageLabel: 'of budget remaining',
-  },
-  expenses: {
-    title: 'Monthly expense',
-    value: 56700.6,
-    relativePercentage: 8,
-    relativePercentageLabel: 'vs last month',
-  },
-  incomes: {
-    title: 'Monthly income',
-    value: 313400.8,
-    relativePercentage: 5,
-    relativePercentageLabel: 'vs last month',
-  },
+export const getSummaryCardsData = (summaryResponse: GetSummarySuccessResponse) => {
+  const currentMonth = summaryResponse.find(
+    (item) => item.month === new Date().getMonth() && item.year === new Date().getFullYear(),
+  )
+
+  const currentMonthValues = {
+    budget: currentMonth?.budget ?? 0,
+    expenses: currentMonth?.expenses ?? 0,
+    incomes: currentMonth?.incomes ?? 0,
+  }
+
+  const lastMonth = summaryResponse.find(
+    (item) => item.month === new Date().getMonth() - 1 && item.year === new Date().getFullYear(),
+  )
+
+  const lastMonthValues = {
+    budget: lastMonth?.budget ?? 0,
+    expenses: lastMonth?.expenses ?? 0,
+    incomes: lastMonth?.incomes ?? 0,
+  }
+
+  const budgetRelativePercentage = getRelativePercentage(
+    currentMonthValues.budget,
+    lastMonthValues.budget,
+  )
+
+  const expensesRelativePercentage = getRelativePercentage(
+    currentMonthValues.expenses,
+    lastMonthValues.expenses,
+  )
+
+  const incomesRelativePercentage = getRelativePercentage(
+    currentMonthValues.incomes,
+    lastMonthValues.incomes,
+  )
+
+  return {
+    budget: {
+      title: 'Monthly budget',
+      value: currentMonthValues.budget,
+      relativePercentage: budgetRelativePercentage,
+      relativePercentageLabel: 'of budget remaining',
+    },
+    expenses: {
+      title: 'Monthly expense',
+      value: currentMonthValues.expenses,
+      relativePercentage: expensesRelativePercentage,
+      relativePercentageLabel: 'vs last month',
+    },
+    incomes: {
+      title: 'Monthly income',
+      value: currentMonthValues.incomes,
+      relativePercentage: incomesRelativePercentage,
+      relativePercentageLabel: 'vs last month',
+    },
+  }
 }
 
 export type ExpenseCategory =

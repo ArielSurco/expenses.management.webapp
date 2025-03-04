@@ -4,22 +4,25 @@ import { SummaryCard } from '@/expenses/components/summary-card'
 import {
   type ExpenseCategory,
   generateColor,
+  getSummaryCardsData,
   pieChartConfig,
   pieChartData,
-  summaryCards,
 } from '@/expenses/constants/mock-data'
 import { NewIncomeDialog } from '@/incomes/components/new-income-dialog'
+import { getSummary } from '@/movements/services/get-summary'
 import { Button } from '@/shared/components/button'
 import { Card, CardContent } from '@/shared/components/card'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/shared/components/chart'
 import { cn } from '@/shared/functions/cn'
 import { Cell, Pie, PieChart } from '@/shared/lib/recharts'
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const summary = await getSummary()
+
   return (
     <main className='min-h-screen w-full p-4'>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4'>
-        {Object.values(summaryCards).map((card, index) => (
+        {Object.values(getSummaryCardsData(summary.data!)).map((card, index) => (
           <SummaryCard
             className={cn({ 'border-primary bg-primary': index === 0 })}
             key={card.title}

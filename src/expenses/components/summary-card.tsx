@@ -4,7 +4,7 @@ import { cn } from '@/shared/functions/cn'
 
 interface SummaryCardProps {
   className?: string
-  relativePercentage: number
+  relativePercentage: number | null
   relativePercentageLabel: string
   title: string
   value: number
@@ -34,11 +34,13 @@ export function SummaryCard({
           />
         </div>
       </CardContent>
-      <CardFooter className='p-0'>
-        <div className='text-sm'>
-          {relativePercentage}% {relativePercentageLabel}
-        </div>
-      </CardFooter>
+      {relativePercentage ? (
+        <CardFooter className='p-0'>
+          <div className='text-sm'>
+            {relativePercentage}% {relativePercentageLabel}
+          </div>
+        </CardFooter>
+      ) : null}
     </Card>
   )
 }

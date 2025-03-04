@@ -17,7 +17,7 @@ const action = async (formData: FormData) => {
 }
 
 export async function NewIncomeForm() {
-  const accountsResponse = await getAccountsService();
+  const accountsResponse = await getAccountsService()
 
   const accounts = accountsResponse.success ? accountsResponse.data : []
 
