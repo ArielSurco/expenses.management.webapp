@@ -6,6 +6,7 @@ interface SpendServiceParams {
   accountId: string
   categoryId: string
   currencyId: string
+  date: string
   detail: string
   forceSpend: boolean
   title: string

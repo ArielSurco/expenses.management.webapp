@@ -20,7 +20,9 @@ const responseSchema = z.array(
 export type GetSummarySuccessResponse = z.infer<typeof responseSchema>
 
 export const getSummary = async () => {
-  const response = await api.fetch(responseSchema, '/movement/summary', { sendToken: true })
+  const response = await api.fetch(responseSchema, '/movement/summary', {
+    sendToken: true,
+  })
 
   return response
 }

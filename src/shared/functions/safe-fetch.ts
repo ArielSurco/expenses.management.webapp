@@ -3,6 +3,7 @@ import { type ZodSchema } from 'zod'
 interface SuccessResponse<T> {
   data: T
   errorMessage: undefined
+  raw: null
   status: number
   success: true
 }
@@ -10,6 +11,7 @@ interface SuccessResponse<T> {
 interface FailedResponse {
   data: null
   errorMessage: string
+  raw: Response
   status: number
   success: false
 }
@@ -37,6 +39,7 @@ export const safeFetch = async <T>(
     return {
       data: data as T,
       errorMessage: undefined,
+      raw: null,
       status: response.status,
       success: true,
     }
@@ -45,6 +48,7 @@ export const safeFetch = async <T>(
   return {
     data: null,
     errorMessage: response.statusText,
+    raw: response,
     status: response.status,
     success: false,
   }

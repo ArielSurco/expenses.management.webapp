@@ -29,6 +29,7 @@ const action = async (formData: FormData) => {
     forceSpend: false,
     title: formData.get('title') as string,
     value: amountValue,
+    date: formData.get('date') as string,
   })
 
   if (response.success) {

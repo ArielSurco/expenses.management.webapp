@@ -29,6 +29,7 @@ const apiFetch = async <T>(schema: ZodSchema<T>, path: string, init?: FetchReque
       path,
       status: data.status,
       message: data.errorMessage,
+      raw: data.raw,
     })
   }
 
